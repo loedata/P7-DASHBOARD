@@ -6,3 +6,4 @@ scikit_learn
 lightgbm
 seaborn
 pickle
+python==3.8.8
