@@ -166,12 +166,9 @@ def load():
     with st.spinner('Import des données'):
         
         # Import du dataframe des informations des traits stricts du client
-        # fic_client_info = FILE_CLIENT_INFO
-        # with open(fic_client_info, 'rb') as df_info_client:
-        #     df_info_client = pickle.load(df_info_client)
-        fic_client_info = open('resources/df_info_client.pickle', 'rb')
-        df_info_client = pickle.load(fic_client_info)
-        fic_client_info.close()       
+        fic_client_info = FILE_CLIENT_INFO
+        with open(fic_client_info, 'rb') as df_info_client:
+            df_info_client = pickle.load(df_info_client)    
             
         # Import du dataframe des informations sur le prêt du client
         fic_client_pret = FILE_CLIENT_PRET
@@ -349,39 +346,6 @@ with st.container():
         st.write("")    
         st.markdown(f'Crédit score moyen des 10 clients similaires : **{score_moy_voisins_test}**')
 
-# # ====================================================================
-# # CLIENTS SIMILAIRES
-# # ====================================================================
-
-# html_clients_similaires="""
-#     <div class="card">
-#       <div class="card-body" style="border-radius: 10px 10px 0px 0px;
-#                   background: #DEC7CB; padding-top: 5px; width: auto;
-#                   height: 40px;">
-#         <h3 class="card-title" style="background-color:#DEC7CB; color:Crimson;
-#                    font-family:Georgia; text-align: center; padding: 0px 0;">
-#           Clients similaires
-#         </h3>
-#       </div>
-#     </div>
-#     """
-
-# st.markdown(html_clients_similaires, unsafe_allow_html=True)
-
-# with st.expander('Traits stricts'):
-#         # Infos principales clients similaires
-#         voisins_info = df_info_voisins[df_info_voisins['ID_CLIENT'] == client_id].iloc[:, 1:]
-#         voisins_info.set_index('INDEX_VOISIN', inplace=True)
-#         st.dataframe(voisins_info)
-
-# with st.expander('Demande de prêt'):
-#         # Infos principales sur la demande de prêt
-#         voisins_pret = df_pret_voisins[df_pret_voisins['ID_CLIENT'] == client_id].iloc[:, 1:]
-#         voisins_pret.set_index('INDEX_VOISIN', inplace=True)
-#         st.dataframe(voisins_pret)
-
-# # with st.expander('Demande de prêt'):
-
 
 # ====================================================================
 # 
@@ -437,10 +401,12 @@ def infos_clients_similaires():
             </div>
         </div>
         """
-    st.markdown(html_clients_similaires, unsafe_allow_html=True)
     
     # ====================== GRAPHIQUES COMPARANT CLIENT COURANT / CLIENTS SIMILAIRES =========================== 
     if st.sidebar.checkbox("Show graphiques comparatifs ?"):     
+        
+        st.markdown(html_clients_similaires, unsafe_allow_html=True)
+
         with st.spinner('**Affiche les graphiques comparant le client courant et les clients similaires...**'):                 
                        
             with st.expander('Comparaison variables impactantes client courant/moyennes des clients similaires',
@@ -651,8 +617,8 @@ def infos_clients_similaires():
                                 sns.violinplot(x='PRED_CLASSE_CLIENT', y='AMT_ANNUITY',
                                                data=df_dashboard,
                                                palette=['SteelBlue', 'Crimson'])
-                                df_client = df_dashboard.iloc[1]
-                                plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                df_client_courant = df_dashboard.iloc[1]
+                                plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                          amt_client,
                                          color="orange",
                                          marker="$\\bigotimes$", markersize=28)
@@ -743,8 +709,8 @@ def infos_clients_similaires():
                                 sns.violinplot(x='PRED_CLASSE_CLIENT', y='BUREAU_CURRENT_CREDIT_DEBT_DIFF_MIN',
                                                data=df_dashboard,
                                                palette=['SteelBlue', 'Crimson'])
-                                df_client = df_dashboard.iloc[1]
-                                plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                df_client_courant = df_dashboard.iloc[1]
+                                plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                          bccddm_client,
                                          color="orange",
                                          marker="$\\bigotimes$", markersize=28)
@@ -835,8 +801,8 @@ def infos_clients_similaires():
                                 sns.violinplot(x='PRED_CLASSE_CLIENT', y='BUREAU_CURRENT_CREDIT_DEBT_DIFF_MEAN',
                                                data=df_dashboard,
                                                palette=['SteelBlue', 'Crimson'])
-                                df_client = df_dashboard.iloc[1]
-                                plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                df_client_courant = df_dashboard.iloc[1]
+                                plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                          bccddmean_client,
                                          color="orange",
                                          marker="$\\bigotimes$", markersize=28)
@@ -933,8 +899,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='BUREAU_CURRENT_DEBT_TO_CREDIT_RATIO_MEAN',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              bcdtcrm_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -1035,8 +1001,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='CAR_EMPLOYED_RATIO',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              cer_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -1136,8 +1102,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='CREDIT_ANNUITY_RATIO',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              car_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -1238,8 +1204,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='CREDIT_GOODS_RATIO',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              cgr_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -1338,8 +1304,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='YEAR_BIRTH',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              age_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -1439,8 +1405,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='DAYS_ID_PUBLISH',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              dip_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -1540,8 +1506,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='EXT_SOURCE_1',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              es1_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -1641,8 +1607,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='EXT_SOURCE_2',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              es2_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -1742,8 +1708,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='EXT_SOURCE_3',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              es3_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -1843,8 +1809,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='EXT_SOURCE_MAX',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              esm_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -1944,8 +1910,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='EXT_SOURCE_SUM',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              ess_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -2046,8 +2012,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='INST_PAY_AMT_INSTALMENT_SUM',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              ipais_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -2151,8 +2117,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='INST_PAY_DAYS_PAYMENT_RATIO_MAX',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              ipdprm_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -2252,8 +2218,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='POS_CASH_NAME_CONTRACT_STATUS_ACTIVE_SUM',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              pcncsas_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
@@ -2355,8 +2321,8 @@ def infos_clients_similaires():
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='PREV_APP_INTEREST_SHARE_MAX',
                                                    data=df_dashboard,
                                                    palette=['SteelBlue', 'Crimson'])
-                                    df_client = df_dashboard.iloc[1]
-                                    plt.plot(df_client['PRED_CLASSE_CLIENT'],
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              paism_client,
                                              color="orange",
                                              marker="$\\bigotimes$", markersize=28)
