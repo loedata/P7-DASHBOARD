@@ -166,9 +166,12 @@ def load():
     with st.spinner('Import des données'):
         
         # Import du dataframe des informations des traits stricts du client
-        fic_client_info = FILE_CLIENT_INFO
-        with open(fic_client_info, 'rb') as df_info_client:
-            df_info_client = pickle.load(df_info_client)
+        # fic_client_info = FILE_CLIENT_INFO
+        # with open(fic_client_info, 'rb') as df_info_client:
+        #     df_info_client = pickle.load(df_info_client)
+        fic_client_info = open('resources/df_info_client.pickle', 'rb')
+        df_info_client = pickle.load(fic_client_info)
+        fic_client_info.close()       
             
         # Import du dataframe des informations sur le prêt du client
         fic_client_pret = FILE_CLIENT_PRET
