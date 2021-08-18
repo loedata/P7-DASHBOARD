@@ -2456,6 +2456,55 @@ def infos_clients_similaires():
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
                                     st.pyplot()   
 
+
+                        # ==============================================================
+                        # Variable NAME_EDUCATION_TYPE_HIGHER_EDUCATION
+                        # Indicateur si le client possède une voiture
+                        # ==============================================================
+                        if 'NAME_EDUCATION_TYPE_HIGHER_EDUCATION' in feat_imp_to_show:
+                                
+                            with st.spinner('**Chargement du graphique comparatif NAME_EDUCATION_TYPE_HIGHER_EDUCATION...**'):
+                                
+                                    nethe_client = int(df_dashboard[df_dashboard['SK_ID_CURR'] == client_id][
+                                        'NAME_EDUCATION_TYPE_HIGHER_EDUCATION'].values)
+
+                                    st.markdown(html_NAME_EDUCATION_TYPE_HIGHER_EDUCATION, unsafe_allow_html=True)
+                                    
+                                    # ==================== ViolinPlot ========================================================
+                                    sns.violinplot(x='PRED_CLASSE_CLIENT', y='NAME_EDUCATION_TYPE_HIGHER_EDUCATION',
+                                                   data=df_dashboard,
+                                                   palette=['SteelBlue', 'Crimson'])
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
+                                             nethe_client,
+                                             color="orange",
+                                             marker="$\\bigotimes$", markersize=28)
+                                    plt.xlabel('TARGET', fontsize=16)
+                                    client = mlines.Line2D([], [], color='orange', marker='$\\bigotimes$',
+                                                           linestyle='None',
+                                                           markersize=16, label='Position du client')
+                                    plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.pyplot()
+                                        
+                                    # ==================== DistPlot ==========================================================
+                                    # Non-défaillants
+                                    sns.distplot(df_dashboard['NAME_EDUCATION_TYPE_HIGHER_EDUCATION'][df_dashboard[
+                                        'PRED_CLASSE_CLIENT'] == 0],
+                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                    # Défaillants
+                                    sns.distplot(df_dashboard['NAME_EDUCATION_TYPE_HIGHER_EDUCATION'][df_dashboard[
+                                        'PRED_CLASSE_CLIENT'] == 1],
+                                                 label='Défaillants', hist=False, color='Crimson')
+                                    plt.xlabel('NAME_EDUCATION_TYPE_HIGHER_EDUCATION', fontsize=16)
+                                    plt.ylabel('Probability Density', fontsize=16)
+                                    plt.xticks(fontsize=16, rotation=90)
+                                    plt.yticks(fontsize=16)
+                                    # Position du client
+                                    plt.axvline(x=nethe_client, color='orange', label='Position du client')
+                                    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.pyplot()  
+
+
                                     
     # ====================== COMPARAISON TRAITS STRICTS CLIENT COURANT / CLIENTS SIMILAIRES ============================
     if st.sidebar.checkbox("Compare traits stricts ?"):     
