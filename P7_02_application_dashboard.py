@@ -552,7 +552,7 @@ def infos_clients_similaires():
                         plt.plot(x_gp1, y_all_train_nondef_gp3, color='Green')
                         plt.plot(x_gp1, y_all_train_def_gp3, color='Crimson')
                         plt.xticks(rotation=90)
-                        # st.set_option('deprecation.showPyplotGlobalUse', False)
+                        st.set_option('deprecation.showPyplotGlobalUse', False)
                         st.pyplot()
                     with col2: 
                         # Lineplot de comparaison des features importances client courant/voisins/all ================
@@ -562,7 +562,7 @@ def infos_clients_similaires():
                         plt.plot(x_gp2, y_all_train_nondef_gp4, color='Green')
                         plt.plot(x_gp2, y_all_train_def_gp4, color='Crimson')
                         plt.xticks(rotation=90)
-                        # st.set_option('deprecation.showPyplotGlobalUse', False)
+                        st.set_option('deprecation.showPyplotGlobalUse', False)
                         st.pyplot()
                         
                     with st.container(): 
@@ -661,6 +661,7 @@ def infos_clients_similaires():
                                                        linestyle='None',
                                                        markersize=16, label='Position du client')
                                 plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                st.set_option('deprecation.showPyplotGlobalUse', False)
                                 st.pyplot()
                                     
                                 # ==================== DistPlot ==========================================================
@@ -679,6 +680,7 @@ def infos_clients_similaires():
                                 # Position du client
                                 plt.axvline(x=amt_client, color='orange', label='Position du client')
                                 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                st.set_option('deprecation.showPyplotGlobalUse', False)
                                 st.pyplot()                                  
 
 
@@ -751,6 +753,7 @@ def infos_clients_similaires():
                                                        linestyle='None',
                                                        markersize=16, label='Position du client')
                                 plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                st.set_option('deprecation.showPyplotGlobalUse', False)
                                 st.pyplot()
                                     
                                 # ==================== DistPlot ==========================================================
@@ -769,6 +772,7 @@ def infos_clients_similaires():
                                 # Position du client
                                 plt.axvline(x=bccddm_client, color='orange', label='Position du client')
                                 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                st.set_option('deprecation.showPyplotGlobalUse', False)
                                 st.pyplot()                                  
 
                                 
@@ -841,6 +845,7 @@ def infos_clients_similaires():
                                                        linestyle='None',
                                                        markersize=16, label='Position du client')
                                 plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                st.set_option('deprecation.showPyplotGlobalUse', False)
                                 st.pyplot()
                                     
                                 # ==================== DistPlot ==========================================================
@@ -859,6 +864,7 @@ def infos_clients_similaires():
                                 # Position du client
                                 plt.axvline(x=bccddmean_client, color='orange', label='Position du client')
                                 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                st.set_option('deprecation.showPyplotGlobalUse', False)
                                 st.pyplot()
                                 
                                 
@@ -937,6 +943,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -955,6 +962,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=bcdtcrm_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                      
                                 else:
@@ -1037,6 +1045,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -1055,6 +1064,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=cer_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                     
                                 else:
@@ -1136,6 +1146,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -1154,6 +1165,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=car_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                     
                                 else:
@@ -1236,6 +1248,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -1254,6 +1267,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=cgr_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()                                   
                                     
                                 else:
@@ -1334,6 +1348,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -1352,6 +1367,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=age_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()                                   
                                                                         
                                 else:
@@ -1433,6 +1449,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -1451,6 +1468,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=dip_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()                                   
                                                                                                            
                                 else:
@@ -1532,6 +1550,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -1550,6 +1569,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=es1_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()                                   
                                                                                                            
                                 else:
@@ -1631,6 +1651,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -1649,6 +1670,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=es2_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()                                   
                                    
                                 else:
@@ -1730,6 +1752,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -1748,6 +1771,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=es3_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()                                   
                                     
                                 else:
@@ -1829,6 +1853,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -1847,6 +1872,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=esm_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()                                   
                                                                         
                                 else:
@@ -1928,6 +1954,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -1946,6 +1973,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=ess_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()                                   
                                     
                                 else:
@@ -2028,6 +2056,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -2046,6 +2075,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=ipais_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()                                   
                                     
                                 else:
@@ -2131,6 +2161,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -2149,6 +2180,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=ipdprm_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()                                   
                                                                         
                                 else:
@@ -2230,6 +2262,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -2248,6 +2281,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=pcncsas_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()                                   
                                                                                                             
                                 else:
@@ -2331,6 +2365,7 @@ def infos_clients_similaires():
                                                            linestyle='None',
                                                            markersize=16, label='Position du client')
                                     plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()
                                         
                                     # ==================== DistPlot ==========================================================
@@ -2349,6 +2384,7 @@ def infos_clients_similaires():
                                     # Position du client
                                     plt.axvline(x=paism_client, color='orange', label='Position du client')
                                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.set_option('deprecation.showPyplotGlobalUse', False)
                                     st.pyplot()                                   
                                                                                                                                                 
                                 else:
