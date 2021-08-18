@@ -98,6 +98,7 @@ html_BUREAU_CURRENT_CREDIT_DEBT_DIFF_MEAN = "<h4 style='text-align: center'>BURE
 html_INST_PAY_AMT_INSTALMENT_SUM = "<h4 style='text-align: center'>INST_PAY_AMT_INSTALMENT_SUM</h4> <br/> <h5 style='text-align: center'>Somme du montant de l'acompte prescrit des crédits précédents sur cet acompte</h5> <hr/>" 
 html_BUREAU_CURRENT_DEBT_TO_CREDIT_RATIO_MEAN = "<h4 style='text-align: center'>BUREAU_CURRENT_DEBT_TO_CREDIT_RATIO_MEAN</h4> <br/> <h5 style='text-align: center'>Moyenne du ratio des prêts précédents sur d'autres institution de : la dette actuelle sur le crédit et la limite de crédit actuelle de la carte de crédit (valeur * 100)</h5> <hr/>" 
 html_CAR_EMPLOYED_RATIO = "<h4 style='text-align: center'>CAR_EMPLOYED_RATIO</h4> <br/> <h5 style='text-align: center'>Ratio : Âge de la voiture du demandeur / Ancienneté dans l'emploi à la date de la demande (valeur * 1000)</h5> <hr/>" 
+html_CODE_GENDER = "<h4 style='text-align: center'>CODE_GENDER</h4> <br/> <h5 style='text-align: center'>Sexe</h5> <hr/>" 
 html_CREDIT_ANNUITY_RATIO = "<h4 style='text-align: center'>CREDIT_ANNUITY_RATIO</h4> <br/> <h5 style='text-align: center'>Ratio : montant du crédit du prêt / Annuité de prêt</h5> <hr/>" 
 html_CREDIT_GOODS_RATIO = "<h4 style='text-align: center'>CREDIT_GOODS_RATIO</h4> <br/> <h5 style='text-align: center'>Ratio : Montant du crédit du prêt / prix des biens pour lesquels le prêt est accordé / Crédit est supérieur au prix des biens ? (valeur * 100)</h5> <hr/>" 
 html_YEAR_BIRTH = "<h4 style='text-align: center'>YEAR_BIRTH</h4> <br/> <h5 style='text-align: center'>Âge (ans)</h5> <hr/>" 
@@ -107,7 +108,9 @@ html_EXT_SOURCE_2 = "<h4 style='text-align: center'>EXT_SOURCE_2</h4> <br/> <h5 
 html_EXT_SOURCE_3 = "<h4 style='text-align: center'>EXT_SOURCE_3</h4> <br/> <h5 style='text-align: center'>Source externe normalisée (valeur * 100)</h5> <hr/>" 
 html_EXT_SOURCE_MAX = "<h4 style='text-align: center'>EXT_SOURCE_MAX</h4> <br/> <h5 style='text-align: center'>Valeur maximale des 3 sources externes normalisées (EXT_SOURCE_1, EXT_SOURCE_2 et EXT_SOURCE_3) (valeur * 100)</h5> <hr/>" 
 html_EXT_SOURCE_SUM = "<h4 style='text-align: center'>EXT_SOURCE_SUM</h4> <br/> <h5 style='text-align: center'>Somme des 3 sources externes normalisées (EXT_SOURCE_1, EXT_SOURCE_2 et EXT_SOURCE_3, valeur * 100)</h5> <hr/>" 
+html_FLAG_OWN_CAR = "<h4 style='text-align: center'>FLAG_OWN_CAR</h4> <br/> <h5 style='text-align: center'>Indicateur si le client possède une voiture</h5> <hr/>" 
 html_INST_PAY_DAYS_PAYMENT_RATIO_MAX = "<h4 style='text-align: center'>INST_PAY_DAYS_PAYMENT_RATIO_MAX</h4> <br/> <h5 style='text-align: center'>Valeur maximal dans l'historique des précédents crédits remboursés dans Home Crédit du ratio : La date à laquelle le versement du crédit précédent était censé être payé (par rapport à la date de demande du prêt actuel) \ Quand les échéances du crédit précédent ont-elles été effectivement payées (par rapport à la date de demande du prêt</h5> <hr/>" 
+html_NAME_EDUCATION_TYPE_HIGHER_EDUCATION = "<h4 style='text-align: center'>NAME_EDUCATION_TYPE_HIGHER_EDUCATION</h4> <br/> <h5 style='text-align: center'>Niveau d'éducation le plus élévé</h5> <hr/>" 
 html_POS_CASH_NAME_CONTRACT_STATUS_ACTIVE_SUM = "<h4 style='text-align: center'>POS_CASH_NAME_CONTRACT_STATUS_ACTIVE_SUM</h4> <br/> <h5 style='text-align: center'>Somme des contrats actifs au cours du mois</h5> <hr/>" 
 html_PREV_APP_INTEREST_SHARE_MAX = "<h4 style='text-align: center'>PREV_APP_INTEREST_SHARE_MAX</h4> <br/> <h5 style='text-align: center'>La valeur maximale de tous les précédents crédit dans d'autres institution : de la durée du crédit multiplié par l'annuité du prêt moins le montant final du crédit</h5> <hr/>" 
 
@@ -2358,7 +2361,102 @@ def infos_clients_similaires():
                                     st.markdown(html_PREV_APP_INTEREST_SHARE_MAX, unsafe_allow_html=True)                                   
                                     st.write("Toutes les valeurs sont identiques") 
 
+                        # ==============================================================
+                        # Variable CODE_GENDER
+                        # Sexe 
+                        # ==============================================================
+                        if 'CODE_GENDER' in feat_imp_to_show:
+                                
+                            with st.spinner('**Chargement du graphique comparatif CODE_GENDER...**'):
+                                    
+                                    cg_client = int(df_dashboard[df_dashboard['SK_ID_CURR'] == client_id][
+                                        'CODE_GENDER'].values)
 
+                                    st.markdown(html_CODE_GENDER, unsafe_allow_html=True)
+                                    
+                                    # ==================== ViolinPlot ========================================================
+                                    sns.violinplot(x='PRED_CLASSE_CLIENT', y='CODE_GENDER',
+                                                   data=df_dashboard,
+                                                   palette=['SteelBlue', 'Crimson'])
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
+                                             cg_client,
+                                             color="orange",
+                                             marker="$\\bigotimes$", markersize=28)
+                                    plt.xlabel('TARGET', fontsize=16)
+                                    client = mlines.Line2D([], [], color='orange', marker='$\\bigotimes$',
+                                                           linestyle='None',
+                                                           markersize=16, label='Position du client')
+                                    plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.pyplot()
+                                        
+                                    # ==================== DistPlot ==========================================================
+                                    # Non-défaillants
+                                    sns.distplot(df_dashboard['CODE_GENDER'][df_dashboard[
+                                        'PRED_CLASSE_CLIENT'] == 0],
+                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                    # Défaillants
+                                    sns.distplot(df_dashboard['CODE_GENDER'][df_dashboard[
+                                        'PRED_CLASSE_CLIENT'] == 1],
+                                                 label='Défaillants', hist=False, color='Crimson')
+                                    plt.xlabel('CODE_GENDER', fontsize=16)
+                                    plt.ylabel('Probability Density', fontsize=16)
+                                    plt.xticks(fontsize=16, rotation=90)
+                                    plt.yticks(fontsize=16)
+                                    # Position du client
+                                    plt.axvline(x=cg_client, color='orange', label='Position du client')
+                                    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.pyplot()   
+                                    
+                                    
+                        # ==============================================================
+                        # Variable FLAG_OWN_CAR
+                        # Indicateur si le client possède une voiture
+                        # ==============================================================
+                        if 'FLAG_OWN_CAR' in feat_imp_to_show:
+                                
+                            with st.spinner('**Chargement du graphique comparatif FLAG_OWN_CAR...**'):
+                                
+                                    foc_client = int(df_dashboard[df_dashboard['SK_ID_CURR'] == client_id][
+                                        'FLAG_OWN_CAR'].values)
+
+                                    st.markdown(html_FLAG_OWN_CAR, unsafe_allow_html=True)
+                                    
+                                    # ==================== ViolinPlot ========================================================
+                                    sns.violinplot(x='PRED_CLASSE_CLIENT', y='FLAG_OWN_CAR',
+                                                   data=df_dashboard,
+                                                   palette=['SteelBlue', 'Crimson'])
+                                    df_client_courant = df_dashboard.iloc[1]
+                                    plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
+                                             foc_client,
+                                             color="orange",
+                                             marker="$\\bigotimes$", markersize=28)
+                                    plt.xlabel('TARGET', fontsize=16)
+                                    client = mlines.Line2D([], [], color='orange', marker='$\\bigotimes$',
+                                                           linestyle='None',
+                                                           markersize=16, label='Position du client')
+                                    plt.legend(handles=[client], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                                    st.pyplot()
+                                        
+                                    # ==================== DistPlot ==========================================================
+                                    # Non-défaillants
+                                    sns.distplot(df_dashboard['FLAG_OWN_CAR'][df_dashboard[
+                                        'PRED_CLASSE_CLIENT'] == 0],
+                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                    # Défaillants
+                                    sns.distplot(df_dashboard['FLAG_OWN_CAR'][df_dashboard[
+                                        'PRED_CLASSE_CLIENT'] == 1],
+                                                 label='Défaillants', hist=False, color='Crimson')
+                                    plt.xlabel('FLAG_OWN_CAR', fontsize=16)
+                                    plt.ylabel('Probability Density', fontsize=16)
+                                    plt.xticks(fontsize=16, rotation=90)
+                                    plt.yticks(fontsize=16)
+                                    # Position du client
+                                    plt.axvline(x=foc_client, color='orange', label='Position du client')
+                                    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=18)
+                                    st.pyplot()   
+
+                                    
     # ====================== COMPARAISON TRAITS STRICTS CLIENT COURANT / CLIENTS SIMILAIRES ============================
     if st.sidebar.checkbox("Compare traits stricts ?"):     
 
