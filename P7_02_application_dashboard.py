@@ -469,10 +469,14 @@ def infos_clients_similaires():
         </div>
         """
     
+    titre = True
+
     # ====================== GRAPHIQUES COMPARANT CLIENT COURANT / CLIENTS SIMILAIRES =========================== 
     if st.sidebar.checkbox("Voir graphiques comparatifs ?"):     
         
-        st.markdown(html_clients_similaires, unsafe_allow_html=True)
+        if titre:
+            st.markdown(html_clients_similaires, unsafe_allow_html=True)
+            titre = False
 
         with st.spinner('**Affiche les graphiques comparant le client courant et les clients similaires...**'):                 
                        
@@ -2572,6 +2576,10 @@ def infos_clients_similaires():
     # ====================== COMPARAISON TRAITS STRICTS CLIENT COURANT / CLIENTS SIMILAIRES ============================
     if st.sidebar.checkbox("Comparer traits stricts ?"):     
 
+        if titre:
+            st.markdown(html_clients_similaires, unsafe_allow_html=True)
+            titre = False
+            
         with st.spinner('**Affiche les traits stricts comparant le client courant et les clients similaires...**'):                 
                                           
             with st.expander('Comparaison traits stricts',
@@ -2587,6 +2595,10 @@ def infos_clients_similaires():
     # ====================== COMPARAISON DEMANDE DE PRÊT CLIENT COURANT / CLIENTS SIMILAIRES ============================
     if st.sidebar.checkbox("Comparer demande prêt ?"):     
 
+        if titre:
+            st.markdown(html_clients_similaires, unsafe_allow_html=True)
+            titre = False
+            
         with st.spinner('**Affiche les informations de la demande de prêt comparant le client courant et les clients similaires...**'):                 
 
             with st.expander('Comparaison demande de prêt',
