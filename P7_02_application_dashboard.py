@@ -35,7 +35,9 @@ import seaborn as sns
 # Répertoire de sauvegarde du meilleur modèle
 FILE_BEST_MODELE = 'resources/best_model.pickle'
 # Répertoire de sauvegarde des dataframes nécessaires au dashboard
-# Test set
+# Test set brut original
+FILE_APPLICATION_TEST = 'resources/application_test.pickle'
+# Test set pré-procédé
 FILE_TEST_SET = 'resources/test_set.pickle'
 # Dashboard
 FILE_DASHBOARD = 'resources/df_dashboard.pickle'
@@ -47,6 +49,8 @@ FILE_VOISINS_INFO = 'resources/df_info_voisins.pickle'
 FILE_VOISIN_PRET = 'resources/df_pret_voisins.pickle'
 FILE_VOISIN_AGG = 'resources/df_voisin_train_agg.pickle'
 FILE_ALL_TRAIN_AGG = 'resources/df_all_train_agg.pickle'
+# Shap values
+FILE_SHAP_VALUES = 'resources/shap_values.pickle'
 
 # ====================================================================
 # VARIABLES GLOBALES
@@ -208,6 +212,15 @@ def load():
         # Import du dataframe des informations sur les voisins aggrégés
         with open(FILE_TEST_SET, 'rb') as df_test_set:
             test_set = pickle.load(df_test_set)
+
+        # Import du dataframe du test set brut original
+        with open(FILE_APPLICATION_TEST, 'rb') as df_application_test:
+            application_test = pickle.load(df_application_test)
+
+        # Import du dataframe du test set brut original
+        with open(FILE_SHAP_VALUES, 'rb') as shap_values:
+            shap_values = pickle.load(shap_values)
+            
             
     # Import du meilleur modèle lgbm entrainé
     with st.spinner('Import du modèle'):
@@ -219,11 +232,14 @@ def load():
   
        
     return df_info_client, df_pret_client, df_info_voisins, df_pret_voisins, \
-        df_dashboard, df_voisin_train_agg, df_all_train_agg, test_set, best_model
+        df_dashboard, df_voisin_train_agg, df_all_train_agg, test_set, \
+            application_test, shap_values, best_model
 
 # Chargement des dataframes et du modèle
 df_info_client, df_pret_client, df_info_voisins, df_pret_voisins, \
-    df_dashboard, df_voisin_train_agg, df_all_train_agg, test_set, best_model = load()
+    df_dashboard, df_voisin_train_agg, df_all_train_agg, test_set, \
+            application_test, shap_values, best_model = load()
+
 
 
 # ====================================================================
@@ -254,15 +270,15 @@ with st.container():
                                    df_info_voisins['ID_CLIENT'].unique())
     with col2:
         # Infos principales client
-        st.write("*Traits stricts*")
+        # st.write("*Traits stricts*")
         client_info = df_info_client[df_info_client['SK_ID_CURR'] == client_id].iloc[:, :]
         client_info.set_index('SK_ID_CURR', inplace=True)
-        st.dataframe(client_info)
+        st.table(client_info)
         # Infos principales sur la demande de prêt
-        st.write("*Demande de prêt*")
+        # st.write("*Demande de prêt*")
         client_pret = df_pret_client[df_pret_client['SK_ID_CURR'] == client_id].iloc[:, :]
         client_pret.set_index('SK_ID_CURR', inplace=True)
-        st.dataframe(client_pret)
+        st.table(client_pret)
 
 
 # ====================================================================
@@ -378,12 +394,57 @@ with st.container():
 # SIDEBAR
 # ====================================================================
 
+# Toutes Les informations non modifiées du client courant
+df_client_origin = application_test[application_test['SK_ID_CURR'] == client_id]
+
+# Toutes Les informations non modifiées du client courant
+df_client_test = test_set[test_set['SK_ID_CURR'] == client_id]
+
+# Toutes les informations du client courant
+df_client_courant = df_dashboard[df_dashboard['SK_ID_CURR'] == client_id]
+
+
 # --------------------------------------------------------------------
 # LOGO
 # --------------------------------------------------------------------
 # Chargement du logo de l'entreprise
 st.sidebar.image(logo, width=240, caption=" Dashboard - Aide à la décision",
                  use_column_width='always')
+
+
+# --------------------------------------------------------------------
+# PLUS INFORMATIONS
+# --------------------------------------------------------------------
+def all_infos_clients():
+    ''' Affiche toutes les informations sur le client courant
+    '''
+    html_all_infos_clients="""
+        <div class="card">
+            <div class="card-body" style="border-radius: 10px 10px 0px 0px;
+                  background: #DEC7CB; padding-top: 5px; width: auto;
+                  height: 40px;">
+                  <h3 class="card-title" style="background-color:#DEC7CB; color:Crimson;
+                      font-family:Georgia; text-align: center; padding: 0px 0;">
+                      Plus infos
+                  </h3>
+            </div>
+        </div>
+        """
+    
+    # ====================== GRAPHIQUES COMPARANT CLIENT COURANT / CLIENTS SIMILAIRES =========================== 
+    if st.sidebar.checkbox("Voir toutes infos clients ?"):     
+        
+        st.markdown(html_all_infos_clients, unsafe_allow_html=True)
+
+        with st.spinner('**Affiche toutes les informations sur le client courant...**'):                 
+                       
+            with st.expander('Toutes les informations du client courant',
+                             expanded=True):
+                st.dataframe(df_client_origin)
+                st.dataframe(df_client_test)
+
+st.sidebar.subheader('Plus infos')
+all_infos_clients()
 
 # --------------------------------------------------------------------
 # CLIENTS SIMILAIRES 
@@ -407,7 +468,7 @@ def infos_clients_similaires():
         """
     
     # ====================== GRAPHIQUES COMPARANT CLIENT COURANT / CLIENTS SIMILAIRES =========================== 
-    if st.sidebar.checkbox("Show graphiques comparatifs ?"):     
+    if st.sidebar.checkbox("Voir graphiques comparatifs ?"):     
         
         st.markdown(html_clients_similaires, unsafe_allow_html=True)
 
@@ -421,9 +482,8 @@ def infos_clients_similaires():
                     # ====================================================================
                     # Lineplot comparatif features importances client courant/voisins
                     # ====================================================================
+                    
                     # ===================== Valeurs moyennes des features importances pour le client courant =====================
-                    df_client_courant = \
-                        df_dashboard[df_dashboard['SK_ID_CURR'] == client_id]
                     df_feat_client  = df_client_courant[['SK_ID_CURR', 'AMT_ANNUITY',
                                'BUREAU_CURRENT_CREDIT_DEBT_DIFF_MIN',
                                'BUREAU_CURRENT_CREDIT_DEBT_DIFF_MEAN',
@@ -2508,7 +2568,7 @@ def infos_clients_similaires():
 
                                     
     # ====================== COMPARAISON TRAITS STRICTS CLIENT COURANT / CLIENTS SIMILAIRES ============================
-    if st.sidebar.checkbox("Compare traits stricts ?"):     
+    if st.sidebar.checkbox("Comparer traits stricts ?"):     
 
         with st.spinner('**Affiche les traits stricts comparant le client courant et les clients similaires...**'):                 
                                           
@@ -2520,10 +2580,10 @@ def infos_clients_similaires():
                     st.write('Client courant')
                     st.dataframe(client_info)
                     st.write('10 clients similaires')
-                    st.dataframe(voisins_info)
+                    st.dataframe(voisins_info.style.highlight_max(axis=0))
             
     # ====================== COMPARAISON DEMANDE DE PRÊT CLIENT COURANT / CLIENTS SIMILAIRES ============================
-    if st.sidebar.checkbox("Compare demande prêt ?"):     
+    if st.sidebar.checkbox("Comparer demande prêt ?"):     
 
         with st.spinner('**Affiche les informations de la demande de prêt comparant le client courant et les clients similaires...**'):                 
 
@@ -2535,7 +2595,7 @@ def infos_clients_similaires():
                     st.write('Client courant')
                     st.dataframe(client_pret)
                     st.write('10 clients similaires')
-                    st.dataframe(voisins_pret)
+                    st.dataframe(voisins_pret.style.highlight_max(axis=0))
             
 
 st.sidebar.subheader('Clients similaires')
