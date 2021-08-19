@@ -35,6 +35,8 @@ import seaborn as sns
 # Répertoire de sauvegarde du meilleur modèle
 FILE_BEST_MODELE = 'resources/best_model.pickle'
 # Répertoire de sauvegarde des dataframes nécessaires au dashboard
+# Test set
+FILE_TEST_SET = 'resources/test_set.pickle'
 # Dashboard
 FILE_DASHBOARD = 'resources/df_dashboard.pickle'
 # Client
@@ -203,6 +205,10 @@ def load():
         with open(fic_all_train_agg, 'rb') as df_all_train_agg:
             df_all_train_agg = pickle.load(df_all_train_agg)
 
+        # Import du dataframe des informations sur les voisins aggrégés
+        with open(FILE_TEST_SET, 'rb') as df_test_set:
+            test_set = pickle.load(df_test_set)
+            
     # Import du meilleur modèle lgbm entrainé
     with st.spinner('Import du modèle'):
         
@@ -213,11 +219,11 @@ def load():
   
        
     return df_info_client, df_pret_client, df_info_voisins, df_pret_voisins, \
-        df_dashboard, df_voisin_train_agg, df_all_train_agg, best_model
+        df_dashboard, df_voisin_train_agg, df_all_train_agg, test_set, best_model
 
 # Chargement des dataframes et du modèle
 df_info_client, df_pret_client, df_info_voisins, df_pret_voisins, \
-    df_dashboard, df_voisin_train_agg, df_all_train_agg, best_model = load()
+    df_dashboard, df_voisin_train_agg, df_all_train_agg, test_set, best_model = load()
 
 
 # ====================================================================
@@ -278,10 +284,17 @@ html_score="""
 
 st.markdown(html_score, unsafe_allow_html=True)
 
-# Préparation des données à afficher dans la jauge ==========================
-# Score du client en pourcentage
-score_client = int(np.rint(df_dashboard[
-    df_dashboard['SK_ID_CURR'] == client_id]['SCORE_CLIENT_%']))
+# Préparation des données à afficher dans la jauge ==============================================
+
+# ============== Score du client en pourcentage ==> en utilisant le modèle ======================
+# Sélection des variables du clients
+X_test = test_set[test_set['SK_ID_CURR'] == client_id]
+# Score des prédictions de probabiltés
+y_proba = best_model.predict_proba(X_test.drop('SK_ID_CURR', axis=1))[:, 1]
+# Score du client en pourcentage arrondi et nombre entier
+score_client = int(np.rint(y_proba * 100))
+
+# ============== Score moyen des 10 plus proches voisins du test set en pourcentage =============
 
 # Score moyen des 10 plus proches voisins du test set en pourcentage
 score_moy_voisins_test = int(np.rint(df_dashboard[
