@@ -2644,17 +2644,18 @@ def affiche_facteurs_influence():
                 col1, col2 = st.columns([1, 1])
                 # BarPlot du client courant
                 with col1:
-
-                    plt.clf()
+                    
+                    st.write("toto")
+                    # plt.clf()
                     
 
-                    # BarPlot du client courant
-                    shap.plots.bar( shap_values[client_index], max_display=40)
+                    # # BarPlot du client courant
+                    # shap.plots.bar(shap_values[client_index], max_display=40)
                     
-                    fig = plt.gcf()
-                    fig.set_size_inches((10, 20))
-                    # Plot the graph on the dashboard
-                    st.pyplot(fig)
+                    # fig = plt.gcf()
+                    # fig.set_size_inches((10, 20))
+                    # # Plot the graph on the dashboard
+                    # st.pyplot(fig)
      
                 # Décision plot du client courant
                 with col2:
@@ -2664,10 +2665,10 @@ def affiche_facteurs_influence():
                     shap.decision_plot(explainer.expected_value[1], shap_values_courant[1],
                                     X_test_courant)
                 
-                    fig = plt.gcf()
-                    fig.set_size_inches((10, 15))
+                    fig2 = plt.gcf()
+                    fig2.set_size_inches((10, 15))
                     # Plot the graph on the dashboard
-                    st.pyplot(fig)
+                    st.pyplot(fig2)
                     
 st.sidebar.subheader('Facteurs d\'influence')
 affiche_facteurs_influence()
