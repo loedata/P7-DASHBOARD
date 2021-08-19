@@ -28,6 +28,7 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import seaborn as sns
+import shap
 
 # ====================================================================
 # VARIABLES STATIQUES
@@ -2601,7 +2602,76 @@ def infos_clients_similaires():
 st.sidebar.subheader('Clients similaires')
 infos_clients_similaires()
 
-st.sidebar.subheader('SHAP values')
+# --------------------------------------------------------------------
+# FACTEURS D'INFLUENCE : SHAP VALUE
+# --------------------------------------------------------------------
+    
+def affiche_facteurs_influence():
+    ''' Affiche les facteurs d'influence du client courant
+    '''
+    html_facteurs_influence="""
+        <div class="card">
+            <div class="card-body" style="border-radius: 10px 10px 0px 0px;
+                  background: #DEC7CB; padding-top: 5px; width: auto;
+                  height: 40px;">
+                  <h3 class="card-title" style="background-color:#DEC7CB; color:Crimson;
+                      font-family:Georgia; text-align: center; padding: 0px 0;">
+                      Variables importantes
+                  </h3>
+            </div>
+        </div>
+        """
+    
+    # ====================== GRAPHIQUES COMPARANT CLIENT COURANT / CLIENTS SIMILAIRES =========================== 
+    if st.sidebar.checkbox("Voir facteurs d\'influence"):     
+        
+        st.markdown(html_facteurs_influence, unsafe_allow_html=True)
+
+        with st.spinner('**Affiche les facteurs d\'influence du client courant...**'):                 
+                       
+            with st.expander('Facteurs d\'influence du client courant',
+                              expanded=True):
+                
+                explainer = shap.TreeExplainer(best_model)
+                
+                client_index = test_set[test_set['SK_ID_CURR'] == client_id].index.item()
+                X_shap = test_set.set_index('SK_ID_CURR')
+                X_test_courant = X_shap.iloc[client_index]
+                X_test_courant_array = X_test_courant.values.reshape(1, -1)
+                
+                shap_values_courant = explainer.shap_values(X_test_courant_array)
+                
+                col1, col2 = st.columns([1, 1])
+                # BarPlot du client courant
+                with col1:
+
+                    plt.clf()
+                    
+
+                    # BarPlot du client courant
+                    shap.plots.bar( shap_values[client_index], max_display=40)
+                    
+                    fig = plt.gcf()
+                    fig.set_size_inches((10, 20))
+                    # Plot the graph on the dashboard
+                    st.pyplot(fig)
+     
+                # Décision plot du client courant
+                with col2:
+                    plt.clf()
+
+                    # Décision Plot
+                    shap.decision_plot(explainer.expected_value[1], shap_values_courant[1],
+                                    X_test_courant)
+                
+                    fig = plt.gcf()
+                    fig.set_size_inches((10, 15))
+                    # Plot the graph on the dashboard
+                    st.pyplot(fig)
+                    
+st.sidebar.subheader('Facteurs d\'influence')
+affiche_facteurs_influence()
+
 
 # ====================================================================
 # FOOTER
