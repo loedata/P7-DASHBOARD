@@ -300,6 +300,15 @@ score_client = int(np.rint(y_proba * 100))
 score_moy_voisins_test = int(np.rint(df_dashboard[
     df_dashboard['SK_ID_CURR'] == client_id]['SCORE_10_VOISINS_MEAN_TEST'] * 100))
 
+# ============== Pourcentage de clients voisins défaillants dans l'historique des clients =======
+pourc_def_voisins_train = int(np.rint(df_dashboard[
+    df_dashboard['SK_ID_CURR'] == client_id]['%_NB_10_VOISINS_DEFAILLANT_TRAIN']))
+
+# ============== Pourcentage de clients voisins défaillants prédits parmi les nouveaux clients ==
+pourc_def_voisins_test = int(np.rint(df_dashboard[
+    df_dashboard['SK_ID_CURR'] == client_id]['%_NB_10_VOISINS_DEFAILLANT_TEST']))
+
+
 # Graphique de jauge du cédit score ==========================================
 fig_jauge = go.Figure(go.Indicator(
     mode = 'gauge+number+delta',
@@ -361,30 +370,9 @@ with st.container():
             st.error(score_text)
         st.write("")    
         st.markdown(f'Crédit score moyen des 10 clients similaires : **{score_moy_voisins_test}**')
-
-
-# ====================================================================
-# 
-# ====================================================================
-
-
-# ====================================================================
-# 
-# ====================================================================
-
-
-# ====================================================================
-# 
-# ====================================================================
-
-
-# with st.form(key='my_form'):
-#     text_input = st.text_input(label='Enter some text')
-#     submit_button = st.form_submit_button(label='Submit')
-
-# with st.expander('Choix du client'):
-#     st.write('Juicy deets')
-    
+        st.markdown(f'**{pourc_def_voisins_train}**% de clients voisins rééllement défaillants dans l\'historique')
+        st.markdown(f'**{pourc_def_voisins_test}**% de clients voisins défaillants prédits pour les nouveaux clients')
+   
     
 # ====================================================================
 # SIDEBAR
