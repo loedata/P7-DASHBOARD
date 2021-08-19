@@ -518,7 +518,7 @@ def infos_clients_similaires():
                         # Lineplot de comparaison des features importances client courant/voisins/all ================
                         plt.figure(figsize=(6, 6))
                         plt.plot(x_gp1, y_feat_client_gp1, color='Orange')
-                        plt.plot(x_gp1, y_moy_feat_voisins_gp3, color='SteelBlue')
+                        plt.plot(x_gp1, y_moy_feat_voisins_gp3, color='Green')
                         plt.plot(x_gp1, y_all_train_nondef_gp3, color='Green')
                         plt.plot(x_gp1, y_all_train_def_gp3, color='Crimson')
                         plt.xticks(rotation=90)
@@ -528,7 +528,7 @@ def infos_clients_similaires():
                         # Lineplot de comparaison des features importances client courant/voisins/all ================
                         plt.figure(figsize=(8, 5))
                         plt.plot(x_gp2, y_feat_client_gp2, color='Orange')
-                        plt.plot(x_gp2, y_moy_feat_voisins_gp4, color='SteelBlue')
+                        plt.plot(x_gp2, y_moy_feat_voisins_gp4, color='Green')
                         plt.plot(x_gp2, y_all_train_nondef_gp4, color='Green')
                         plt.plot(x_gp2, y_all_train_def_gp4, color='Crimson')
                         plt.xticks(rotation=90)
@@ -620,8 +620,8 @@ def infos_clients_similaires():
                                 # ==================== ViolinPlot ========================================================
                                 sns.violinplot(x='PRED_CLASSE_CLIENT', y='AMT_ANNUITY',
                                                data=df_dashboard,
-                                               palette=['SteelBlue', 'Crimson'])
-                                df_client_courant = df_dashboard.iloc[1]
+                                               palette=['Green', 'Crimson'])
+
                                 plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                          amt_client,
                                          color="orange",
@@ -638,7 +638,7 @@ def infos_clients_similaires():
                                 # Non-défaillants
                                 sns.distplot(df_dashboard['AMT_ANNUITY'][df_dashboard[
                                     'PRED_CLASSE_CLIENT'] == 0],
-                                             label='Non-Défaillants', hist=False, color='SteelBlue')
+                                             label='Non-Défaillants', hist=False, color='Green')
                                 # Défaillants
                                 sns.distplot(df_dashboard['AMT_ANNUITY'][df_dashboard[
                                     'PRED_CLASSE_CLIENT'] == 1],
@@ -712,8 +712,8 @@ def infos_clients_similaires():
                                 # ==================== ViolinPlot ========================================================
                                 sns.violinplot(x='PRED_CLASSE_CLIENT', y='BUREAU_CURRENT_CREDIT_DEBT_DIFF_MIN',
                                                data=df_dashboard,
-                                               palette=['SteelBlue', 'Crimson'])
-                                df_client_courant = df_dashboard.iloc[1]
+                                               palette=['Green', 'Crimson'])
+
                                 plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                          bccddm_client,
                                          color="orange",
@@ -730,7 +730,7 @@ def infos_clients_similaires():
                                 # Non-défaillants
                                 sns.distplot(df_dashboard['BUREAU_CURRENT_CREDIT_DEBT_DIFF_MIN'][df_dashboard[
                                     'PRED_CLASSE_CLIENT'] == 0],
-                                             label='Non-Défaillants', hist=False, color='SteelBlue')
+                                             label='Non-Défaillants', hist=False, color='Green')
                                 # Défaillants
                                 sns.distplot(df_dashboard['BUREAU_CURRENT_CREDIT_DEBT_DIFF_MIN'][df_dashboard[
                                     'PRED_CLASSE_CLIENT'] == 1],
@@ -804,8 +804,8 @@ def infos_clients_similaires():
                                 # ==================== ViolinPlot ========================================================
                                 sns.violinplot(x='PRED_CLASSE_CLIENT', y='BUREAU_CURRENT_CREDIT_DEBT_DIFF_MEAN',
                                                data=df_dashboard,
-                                               palette=['SteelBlue', 'Crimson'])
-                                df_client_courant = df_dashboard.iloc[1]
+                                               palette=['Green', 'Crimson'])
+
                                 plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                          bccddmean_client,
                                          color="orange",
@@ -822,7 +822,7 @@ def infos_clients_similaires():
                                 # Non-défaillants
                                 sns.distplot(df_dashboard['BUREAU_CURRENT_CREDIT_DEBT_DIFF_MEAN'][df_dashboard[
                                     'PRED_CLASSE_CLIENT'] == 0],
-                                             label='Non-Défaillants', hist=False, color='SteelBlue')
+                                             label='Non-Défaillants', hist=False, color='Green')
                                 # Défaillants
                                 sns.distplot(df_dashboard['BUREAU_CURRENT_CREDIT_DEBT_DIFF_MEAN'][df_dashboard[
                                     'PRED_CLASSE_CLIENT'] == 1],
@@ -902,8 +902,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='BUREAU_CURRENT_DEBT_TO_CREDIT_RATIO_MEAN',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              bcdtcrm_client,
                                              color="orange",
@@ -920,7 +920,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['BUREAU_CURRENT_DEBT_TO_CREDIT_RATIO_MEAN'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['BUREAU_CURRENT_DEBT_TO_CREDIT_RATIO_MEAN'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -1004,8 +1004,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='CAR_EMPLOYED_RATIO',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              cer_client,
                                              color="orange",
@@ -1022,7 +1022,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['CAR_EMPLOYED_RATIO'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['CAR_EMPLOYED_RATIO'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -1105,8 +1105,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='CREDIT_ANNUITY_RATIO',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              car_client,
                                              color="orange",
@@ -1123,7 +1123,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['CREDIT_ANNUITY_RATIO'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['CREDIT_ANNUITY_RATIO'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -1207,8 +1207,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='CREDIT_GOODS_RATIO',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              cgr_client,
                                              color="orange",
@@ -1225,7 +1225,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['CREDIT_GOODS_RATIO'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['CREDIT_GOODS_RATIO'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -1307,8 +1307,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='YEAR_BIRTH',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              age_client,
                                              color="orange",
@@ -1325,7 +1325,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['YEAR_BIRTH'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['YEAR_BIRTH'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -1408,8 +1408,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='DAYS_ID_PUBLISH',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              dip_client,
                                              color="orange",
@@ -1426,7 +1426,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['DAYS_ID_PUBLISH'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['DAYS_ID_PUBLISH'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -1509,8 +1509,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='EXT_SOURCE_1',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              es1_client,
                                              color="orange",
@@ -1527,7 +1527,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['EXT_SOURCE_1'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['EXT_SOURCE_1'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -1610,8 +1610,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='EXT_SOURCE_2',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              es2_client,
                                              color="orange",
@@ -1628,7 +1628,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['EXT_SOURCE_2'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['EXT_SOURCE_2'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -1711,8 +1711,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='EXT_SOURCE_3',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              es3_client,
                                              color="orange",
@@ -1729,7 +1729,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['EXT_SOURCE_3'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['EXT_SOURCE_3'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -1812,8 +1812,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='EXT_SOURCE_MAX',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              esm_client,
                                              color="orange",
@@ -1830,7 +1830,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['EXT_SOURCE_MAX'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['EXT_SOURCE_MAX'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -1913,8 +1913,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='EXT_SOURCE_SUM',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              ess_client,
                                              color="orange",
@@ -1931,7 +1931,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['EXT_SOURCE_SUM'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['EXT_SOURCE_SUM'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -2015,8 +2015,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='INST_PAY_AMT_INSTALMENT_SUM',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              ipais_client,
                                              color="orange",
@@ -2033,7 +2033,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['INST_PAY_AMT_INSTALMENT_SUM'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['INST_PAY_AMT_INSTALMENT_SUM'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -2120,8 +2120,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='INST_PAY_DAYS_PAYMENT_RATIO_MAX',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              ipdprm_client,
                                              color="orange",
@@ -2138,7 +2138,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['INST_PAY_DAYS_PAYMENT_RATIO_MAX'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['INST_PAY_DAYS_PAYMENT_RATIO_MAX'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -2221,8 +2221,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='POS_CASH_NAME_CONTRACT_STATUS_ACTIVE_SUM',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              pcncsas_client,
                                              color="orange",
@@ -2239,7 +2239,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['POS_CASH_NAME_CONTRACT_STATUS_ACTIVE_SUM'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['POS_CASH_NAME_CONTRACT_STATUS_ACTIVE_SUM'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -2324,8 +2324,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='PREV_APP_INTEREST_SHARE_MAX',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              paism_client,
                                              color="orange",
@@ -2342,7 +2342,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['PREV_APP_INTEREST_SHARE_MAX'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['PREV_APP_INTEREST_SHARE_MAX'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -2378,8 +2378,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='CODE_GENDER',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              cg_client,
                                              color="orange",
@@ -2395,7 +2395,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['CODE_GENDER'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['CODE_GENDER'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -2426,8 +2426,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='FLAG_OWN_CAR',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              foc_client,
                                              color="orange",
@@ -2443,7 +2443,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['FLAG_OWN_CAR'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['FLAG_OWN_CAR'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
@@ -2474,8 +2474,8 @@ def infos_clients_similaires():
                                     # ==================== ViolinPlot ========================================================
                                     sns.violinplot(x='PRED_CLASSE_CLIENT', y='NAME_EDUCATION_TYPE_HIGHER_EDUCATION',
                                                    data=df_dashboard,
-                                                   palette=['SteelBlue', 'Crimson'])
-                                    df_client_courant = df_dashboard.iloc[1]
+                                                   palette=['Green', 'Crimson'])
+    
                                     plt.plot(df_client_courant['PRED_CLASSE_CLIENT'],
                                              nethe_client,
                                              color="orange",
@@ -2491,7 +2491,7 @@ def infos_clients_similaires():
                                     # Non-défaillants
                                     sns.distplot(df_dashboard['NAME_EDUCATION_TYPE_HIGHER_EDUCATION'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 0],
-                                                 label='Non-Défaillants', hist=False, color='SteelBlue')
+                                                 label='Non-Défaillants', hist=False, color='Green')
                                     # Défaillants
                                     sns.distplot(df_dashboard['NAME_EDUCATION_TYPE_HIGHER_EDUCATION'][df_dashboard[
                                         'PRED_CLASSE_CLIENT'] == 1],
