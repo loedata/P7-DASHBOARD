@@ -225,7 +225,7 @@ def load():
             best_model = pickle.load(model_lgbm)
   
     # SHAP values
-    with st.spinner('Import du modèle'):
+    with st.spinner('Lancement SHAP values'):
    
         # Test set sans l'identifiant
         X_bar = test_set.set_index('SK_ID_CURR')
@@ -235,12 +235,12 @@ def load():
                     
     return df_info_client, df_pret_client, df_info_voisins, df_pret_voisins, \
         df_dashboard, df_voisin_train_agg, df_all_train_agg, test_set, \
-            application_test, shap_values, best_model, bar_values
+            application_test, best_model, bar_values
 
 # Chargement des dataframes et du modèle
 df_info_client, df_pret_client, df_info_voisins, df_pret_voisins, \
     df_dashboard, df_voisin_train_agg, df_all_train_agg, test_set, \
-            application_test, shap_values, best_model, bar_values = load()
+            application_test, best_model, bar_values = load()
 
 
 
