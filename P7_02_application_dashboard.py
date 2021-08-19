@@ -50,8 +50,6 @@ FILE_VOISINS_INFO = 'resources/df_info_voisins.pickle'
 FILE_VOISIN_PRET = 'resources/df_pret_voisins.pickle'
 FILE_VOISIN_AGG = 'resources/df_voisin_train_agg.pickle'
 FILE_ALL_TRAIN_AGG = 'resources/df_all_train_agg.pickle'
-# Shap values
-FILE_SHAP_VALUES = 'resources/shap_values.pickle'
 
 # ====================================================================
 # VARIABLES GLOBALES
@@ -171,7 +169,7 @@ st.markdown(f""" <style>
 
 # Chargement du modèle et des différents dataframes
 # Optimisation en conservant les données non modifiées en cache mémoire
-# @st.cache(persist = True)
+@st.cache(persist = True)
 def load():
     with st.spinner('Import des données'):
         
@@ -217,12 +215,7 @@ def load():
         # Import du dataframe du test set brut original
         with open(FILE_APPLICATION_TEST, 'rb') as df_application_test:
             application_test = pickle.load(df_application_test)
-
-        # Import du dataframe du test set brut original
-        with open(FILE_SHAP_VALUES, 'rb') as shap_values:
-            shap_values = pickle.load(shap_values)
-            
-            
+                     
     # Import du meilleur modèle lgbm entrainé
     with st.spinner('Import du modèle'):
         
@@ -231,15 +224,23 @@ def load():
         with open(fic_best_model, 'rb') as model_lgbm:
             best_model = pickle.load(model_lgbm)
   
-       
+    # SHAP values
+    with st.spinner('Import du modèle'):
+   
+        # Test set sans l'identifiant
+        X_bar = test_set.set_index('SK_ID_CURR')
+        # Entraînement de shap sur le train set
+        bar_explainer = shap.Explainer(best_model, X_bar)
+        bar_values = bar_explainer(X_bar, check_additivity=False)
+                    
     return df_info_client, df_pret_client, df_info_voisins, df_pret_voisins, \
         df_dashboard, df_voisin_train_agg, df_all_train_agg, test_set, \
-            application_test, shap_values, best_model
+            application_test, shap_values, best_model, bar_values
 
 # Chargement des dataframes et du modèle
 df_info_client, df_pret_client, df_info_voisins, df_pret_voisins, \
     df_dashboard, df_voisin_train_agg, df_all_train_agg, test_set, \
-            application_test, shap_values, best_model = load()
+            application_test, shap_values, best_model, bar_values = load()
 
 
 
@@ -2644,18 +2645,12 @@ def affiche_facteurs_influence():
                 col1, col2 = st.columns([1, 1])
                 # BarPlot du client courant
                 with col1:
-                    
-                    # Test set sans l'identifiant
-                    X_todo = test_set.set_index('SK_ID_CURR')
-                    # Entraînement de shap sur le train set
-                    todo_explainer = shap.Explainer(best_model, X_todo)
-                    todo_values = todo_explainer(X_todo, check_additivity=False)
 
                     plt.clf()
                     
 
                     # BarPlot du client courant
-                    shap.plots.bar(todo_values[client_index], max_display=40)
+                    shap.plots.bar(bar_values[client_index], max_display=40)
                     
                     fig = plt.gcf()
                     fig.set_size_inches((10, 20))
