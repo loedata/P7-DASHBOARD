@@ -2645,11 +2645,17 @@ def affiche_facteurs_influence():
                 # BarPlot du client courant
                 with col1:
                     
+                    # Test set sans l'identifiant
+                    X_todo = test_set.set_index('SK_ID_CURR')
+                    # Entraînement de shap sur le train set
+                    todo_explainer = shap.Explainer(best_model, X_todo)
+                    todo_values = todo_explainer(X_todo, check_additivity=False)
+
                     plt.clf()
                     
 
                     # BarPlot du client courant
-                    shap.plots.bar(shap_values[client_index], max_display=40)
+                    shap.plots.bar(todo_values[client_index], max_display=40)
                     
                     fig = plt.gcf()
                     fig.set_size_inches((10, 20))
