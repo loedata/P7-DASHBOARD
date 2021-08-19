@@ -2645,17 +2645,16 @@ def affiche_facteurs_influence():
                 # BarPlot du client courant
                 with col1:
                     
-                    st.write("toto")
-                    # plt.clf()
+                    plt.clf()
                     
 
-                    # # BarPlot du client courant
-                    # shap.plots.bar(shap_values[client_index], max_display=40)
+                    # BarPlot du client courant
+                    shap.plots.bar(shap_values[client_index], max_display=40)
                     
-                    # fig = plt.gcf()
-                    # fig.set_size_inches((10, 20))
-                    # # Plot the graph on the dashboard
-                    # st.pyplot(fig)
+                    fig = plt.gcf()
+                    fig.set_size_inches((10, 20))
+                    # Plot the graph on the dashboard
+                    st.pyplot(fig)
      
                 # Décision plot du client courant
                 with col2:
