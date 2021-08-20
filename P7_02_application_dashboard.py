@@ -34,22 +34,22 @@ import shap
 # VARIABLES STATIQUES
 # ====================================================================
 # Répertoire de sauvegarde du meilleur modèle
-FILE_BEST_MODELE = 'resources/best_model.pickle'
+FILE_BEST_MODELE = 'resources/modele/best_model.pickle'
 # Répertoire de sauvegarde des dataframes nécessaires au dashboard
 # Test set brut original
-FILE_APPLICATION_TEST = 'resources/application_test.pickle'
+FILE_APPLICATION_TEST = 'resources/data/application_test.pickle'
 # Test set pré-procédé
-FILE_TEST_SET = 'resources/test_set.pickle'
+FILE_TEST_SET = 'resources/data/test_set.pickle'
 # Dashboard
-FILE_DASHBOARD = 'resources/df_dashboard.pickle'
+FILE_DASHBOARD = 'resources/data/df_dashboard.pickle'
 # Client
-FILE_CLIENT_INFO = 'resources/df_info_client.pickle'
-FILE_CLIENT_PRET = 'resources/df_pret_client.pickle'
+FILE_CLIENT_INFO = 'resources/data/df_info_client.pickle'
+FILE_CLIENT_PRET = 'resources/data/df_pret_client.pickle'
 # 10 plus proches voisins du train set
-FILE_VOISINS_INFO = 'resources/df_info_voisins.pickle'
-FILE_VOISIN_PRET = 'resources/df_pret_voisins.pickle'
-FILE_VOISIN_AGG = 'resources/df_voisin_train_agg.pickle'
-FILE_ALL_TRAIN_AGG = 'resources/df_all_train_agg.pickle'
+FILE_VOISINS_INFO = 'resources/data/df_info_voisins.pickle'
+FILE_VOISIN_PRET = 'resources/data/df_pret_voisins.pickle'
+FILE_VOISIN_AGG = 'resources/data/df_voisin_train_agg.pickle'
+FILE_ALL_TRAIN_AGG = 'resources/data/df_all_train_agg.pickle'
 
 # ====================================================================
 # VARIABLES GLOBALES
@@ -89,10 +89,10 @@ group_val4 = ['CAR_EMPLOYED_RATIO_MEAN', 'CODE_GENDER_MEAN',
 # ====================================================================
 # IMAGES
 # ====================================================================
-# Loge de l'entreprise
-logo =  Image.open("resources/logo.png") 
+# Logo de l'entreprise
+logo =  Image.open("resources/images/logo.png") 
 # Légende des courbes
-lineplot_legende =  Image.open("resources/lineplot_legende.png") 
+lineplot_legende =  Image.open("resources/images/lineplot_legende.png") 
 
 # ====================================================================
 # HTML MARKDOWN
